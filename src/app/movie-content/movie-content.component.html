@@ -1,0 +1,22 @@
+<p>
+  movie-content works!
+</p>
+<!-- <button class="btn btn-primary" (click)="onGetMovieData()">
+  Get Movie Data
+</button>
+-->
+<button class="btn btn-primary" (click)="getMovieData()">
+  Search Batman
+</button>
+
+<!-- <ul class="list-group" *ngFor="let movie of movieDataComponent"> -->
+<ul class="list-group">
+  <li class="list-group-item">
+    {{ oneMovie.Title }} (ID: {{ oneMovie.imdbID }})
+  </li>
+</ul>
+<ul class="list-group" *ngFor="let movie of movieDataComponent.Search">
+  <ul class="list-group">
+    <li class="list-group-item">{{ movie.Title }} (ID: {{ movie.imdbID }})</li>
+  </ul>
+</ul>
