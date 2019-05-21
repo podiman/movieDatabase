@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MovieService } from "../movie.service";
+import { OmdbconnectService } from "../services/omdbconnect.service";
+import { Movie } from "../movie.model";
 
 @Component({
   selector: "app-movie-content",
@@ -9,14 +11,39 @@ import { MovieService } from "../movie.service";
 export class MovieContentComponent implements OnInit {
   movieDataComponent = [];
   oneMovie = {};
+  batmanMovies = [];
+  errorMsg;
 
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService, private omdbService: OmdbconnectService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.filterComp.currentMovie.subscribe(movie => {
+    //   this.oneMovie = movie;
+    // });
+  }
 
   getMovieData() {
     this.movieDataComponent = this.movieService.getMovieList();
     console.log(this.movieDataComponent);
+  }
+
+  getTestBatmanMovies() {
+    this.omdbService.getTestBatmanMovieData().subscribe(
+      batmanMovies => {
+        this.batmanMovies = batmanMovies.Search;
+      },
+      error => {
+        this.errorMsg = <any>error;
+      }
+    );
+    // console.log(this.batmanMovies);
+  }
+
+  selectMovie(movie: Movie) {
+    // this.selectedMovie.emit(movie);
+    console.log(movie);
+
+    // this.selectedMovie.next(movie.Title);
   }
 
   // onGetMovieData() {
